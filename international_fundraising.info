@@ -1,0 +1,10 @@
+name = International Fundraising
+description = Provides configuration for integration with International Fundraising
+core = 7.x
+package = WorldVision
+version = 7.x-1.0-beta1
+dependencies[] = entity
+dependencies[] = wsclient
+dependencies[] = wsclient_rest
+features[features_api][] = api:2
+features[wsclient_service][] = wv_international_fundraising

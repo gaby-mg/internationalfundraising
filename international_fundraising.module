@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the International Fundraising feature.
+ */
+
+include_once 'international_fundraising.features.inc';
