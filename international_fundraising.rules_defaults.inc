@@ -65,9 +65,9 @@ function international_fundraising_default_rules_configuration() {
               "param_nif" : [ "commerce-order:commerce-customer-billing:field-sponsorer-nif" ],
               "param_email" : [ "commerce-order:mail" ],
               "param_telefono" : [ "commerce-order:commerce-customer-wv-adtnl-info:field-phonenumber" ],
-              "param_aportacion" : [ "commerce-order:commerce-order-total:amount" ],
+              "param_aportacion" : [ "commerce-order:commerce-order-total:amount-decimal" ],
               "param_periodicidad" : "PRUEBA",
-              "param_debito" : "PRUEBA",
+              "param_debito" : "0",
               "param_proyecto" : "PRUEBA",
               "param_fecha_alta" : "now",
               "param_lopd" : "1"
