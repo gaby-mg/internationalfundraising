@@ -29,11 +29,11 @@ function international_fundraising_default_wsclient_service() {
         }
       },
       "send_formatter" : {
-        "class" : "WsclientRestJSONFormatter",
+        "class" : "WsclientRestFormFormatter",
         "settings" : { "default_root" : "result", "adaptive_root" : 0 }
       },
       "receive_formatter" : {
-        "class" : "WsclientRestJSONFormatter",
+        "class" : "WsclientRestFormFormatter",
         "settings" : { "default_root" : "result", "adaptive_root" : 0 }
       }
     },
@@ -43,12 +43,30 @@ function international_fundraising_default_wsclient_service() {
         "label" : "Update Contact",
         "parameter" : {
           "numero_formulario" : { "type" : "text", "allow null" : 0 },
-          "fundraiser_codigo" : { "type" : "text", "allow null" : 0 }
+          "fundraiser_codigo" : { "type" : "text", "allow null" : 0 },
+          "fundraiser_nombre" : { "type" : "text", "allow null" : 0 },
+          "metodo" : { "type" : "text", "allow null" : 0 },
+          "provincia_captacion" : { "type" : "text", "allow null" : 0 },
+          "nombre" : { "type" : "text", "allow null" : 0 },
+          "direccion_calle" : { "type" : "text", "allow null" : 0 },
+          "codigo_postal" : { "type" : "text", "allow null" : 0 },
+          "poblacion" : { "type" : "text", "allow null" : 0 },
+          "provincia" : { "type" : "text", "allow null" : 0 },
+          "nif" : { "type" : "text", "allow null" : 0 },
+          "email" : { "type" : "text", "allow null" : 0 },
+          "telefono" : { "type" : "text", "allow null" : 0 },
+          "aportacion" : { "type" : "text", "allow null" : 0 },
+          "periodicidad" : { "type" : "text", "allow null" : 0 },
+          "debito" : { "type" : "boolean", "allow null" : 0 },
+          "proyecto" : { "type" : "text", "allow null" : 0 },
+          "fecha_alta" : { "type" : "date", "allow null" : 0 },
+          "lopd" : { "type" : "boolean", "allow null" : 0 }
         },
         "result" : {
           "type" : "text",
           "label" : "International Fundraising Contact Update Response"
-        }
+        },
+        "name" : "wv_intfund_upsert"
       }
     },
     "datatypes" : [],
