@@ -17,6 +17,16 @@ function international_fundraising_default_rules_configuration() {
       "REQUIRES" : [ "rules", "wsclient", "commerce_checkout" ],
       "ON" : { "commerce_checkout_complete" : [] },
       "IF" : [
+        { "user_has_role" : {
+            "account" : [ "commerce-order:owner" ],
+            "roles" : { "value" : { "4" : "4" } }
+          }
+        },
+        { "data_is" : {
+            "data" : [ "commerce-order:owner:profile-fundraiser:field-fundraiser-company" ],
+            "value" : "international_fundraising"
+          }
+        },
         { "entity_has_field" : { "entity" : [ "commerce-order" ], "field" : "commerce_customer_billing" } },
         { "entity_has_field" : {
             "entity" : [ "commerce-order:commerce-customer-billing" ],
@@ -43,10 +53,10 @@ function international_fundraising_default_rules_configuration() {
         { "wsclient_wv_international_fundraising_wv_intfund_upsert" : {
             "USING" : {
               "param_numero_formulario" : [ "commerce-order:order-id" ],
-              "param_fundraiser_codigo" : "PRUEBA",
-              "param_fundraiser_nombre" : "PRUEBA",
-              "param_metodo" : "F2F",
-              "param_provincia_captacion" : "PRUEBA",
+              "param_fundraiser_codigo" : [ "commerce-order:owner:profile-fundraiser:field-fundraiser-id" ],
+              "param_fundraiser_nombre" : [ "commerce-order:owner:field-first-name" ],
+              "param_metodo" : [ "commerce-order:owner:profile-fundraiser:field-fundraising-method" ],
+              "param_provincia_captacion" : [ "commerce-order:owner:profile-fundraiser:field-fundraiser-state" ],
               "param_nombre" : [
                 "commerce-order:commerce-customer-billing:commerce-customer-address:name-line"
               ],
