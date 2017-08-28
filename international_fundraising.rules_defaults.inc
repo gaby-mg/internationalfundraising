@@ -17,14 +17,16 @@ function international_fundraising_default_rules_configuration() {
       "REQUIRES" : [ "rules", "wsclient", "commerce_checkout" ],
       "ON" : { "commerce_checkout_complete" : [] },
       "IF" : [
-        { "user_has_role" : {
-            "account" : [ "commerce-order:owner" ],
-            "roles" : { "value" : { "4" : "4" } }
+        { "entity_has_field" : {
+            "entity" : [ "commerce-order:owner" ],
+            "field" : "field_wv_user_fundraiser"
           }
         },
         { "data_is" : {
-            "data" : [ "commerce-order:owner:profile-fundraiser:field-fundraiser-company" ],
-            "value" : "international_fundraising"
+            "data" : [
+              "commerce-order:owner:field-wv-user-fundraiser:profile-fundraiser:field-fundraiser-company"
+            ],
+            "value" : "International Fundraising"
           }
         },
         { "entity_has_field" : { "entity" : [ "commerce-order" ], "field" : "commerce_customer_billing" } },
@@ -47,16 +49,34 @@ function international_fundraising_default_rules_configuration() {
             "entity" : [ "commerce-order:commerce-customer-wv-adtnl-info" ],
             "field" : "field_phonenumber"
           }
+        },
+        { "entity_has_field" : {
+            "entity" : [ "commerce-order:commerce-line-items:0" ],
+            "field" : "commerce_product"
+          }
+        },
+        { "entity_has_field" : {
+            "entity" : [ "commerce-order:commerce-line-items:0:commerce-product" ],
+            "field" : "commerce_recurring_rec_period"
+          }
         }
       ],
       "DO" : [
         { "wsclient_wv_international_fundraising_wv_intfund_upsert" : {
             "USING" : {
               "param_numero_formulario" : [ "commerce-order:order-id" ],
-              "param_fundraiser_codigo" : [ "commerce-order:owner:profile-fundraiser:field-fundraiser-id" ],
-              "param_fundraiser_nombre" : [ "commerce-order:owner:field-first-name" ],
-              "param_metodo" : [ "commerce-order:owner:profile-fundraiser:field-fundraising-method" ],
-              "param_provincia_captacion" : [ "commerce-order:owner:profile-fundraiser:field-fundraiser-state" ],
+              "param_fundraiser_codigo" : [
+                "commerce-order:owner:field-wv-user-fundraiser:profile-fundraiser:field-fundraiser-id"
+              ],
+              "param_fundraiser_nombre" : [
+                "commerce-order:owner:field-wv-user-fundraiser:profile-main:field-first-name"
+              ],
+              "param_metodo" : [
+                "commerce-order:owner:field-wv-user-fundraiser:profile-fundraiser:field-fundraising-method"
+              ],
+              "param_provincia_captacion" : [
+                "commerce-order:owner:field-wv-user-fundraiser:profile-fundraiser:field-fundraiser-state"
+              ],
               "param_nombre" : [
                 "commerce-order:commerce-customer-billing:commerce-customer-address:name-line"
               ],
@@ -76,7 +96,9 @@ function international_fundraising_default_rules_configuration() {
               "param_email" : [ "commerce-order:mail" ],
               "param_telefono" : [ "commerce-order:commerce-customer-wv-adtnl-info:field-phonenumber" ],
               "param_aportacion" : [ "commerce-order:commerce-order-total:amount-decimal" ],
-              "param_periodicidad" : "PRUEBA",
+              "param_periodicidad" : [
+                "commerce-order:commerce-line-items:0:commerce-product:commerce-recurring-rec-period:interval"
+              ],
               "param_debito" : "0",
               "param_proyecto" : "PRUEBA",
               "param_fecha_alta" : "now",
